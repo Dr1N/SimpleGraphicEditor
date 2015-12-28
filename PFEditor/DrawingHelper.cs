@@ -30,10 +30,13 @@ namespace PFEditor
             { ".gif", ImageFormat.Gif }
         };
 
+        private readonly string _openFilter = "All|*.*|Image *.bmp|*.bmp|Image *.jpg|*.jpg|Image *.png|*.png|Image *.gif|*.gif";
+        private readonly string _saveFilter = "Image*.bmp|*.bmp|Image*.jpg|*.jpg|Image*.png|*.png|Image*.gif|*.gif";
+
         #endregion
 
         #region PROPERTIES
-        
+
         public string FileName { get; set; }    //Имя файла с которым идёт работа
 
         #endregion
@@ -58,7 +61,7 @@ namespace PFEditor
         {
             MyCanvas result;
             string tmpFileName;
-            using (OpenFileDialog openDialog = new OpenFileDialog() { InitialDirectory = Application.StartupPath, Filter = "All|*.*|Image *.bmp|*.bmp|Image *.jpg|*.jpg|Image *.png|*.png|Image *.gif|*.gif" })
+            using (OpenFileDialog openDialog = new OpenFileDialog() { InitialDirectory = Application.StartupPath, Filter = this._openFilter })
             {
                 if (openDialog.ShowDialog() != DialogResult.OK)
                 {
@@ -78,7 +81,7 @@ namespace PFEditor
         {
             if (isSaveAs == true || this.FileName == null)
             {
-                using (SaveFileDialog saveDialog = new SaveFileDialog() { AddExtension = true, DefaultExt = ".bmp", InitialDirectory = Application.StartupPath, Filter = "Image *.bmp|*.bmp|Image *.jpg|*.jpg|Image *.png|*.png|Image *.gif|*.gif" })
+                using (SaveFileDialog saveDialog = new SaveFileDialog() { AddExtension = true, DefaultExt = ".bmp", InitialDirectory = Application.StartupPath, Filter = this._saveFilter })
                 {
                     if (saveDialog.ShowDialog() != DialogResult.OK)
                     {

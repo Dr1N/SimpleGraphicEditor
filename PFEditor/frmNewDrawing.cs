@@ -12,7 +12,7 @@ namespace PFEditor
     {
         #region CONSTS
 
-        private readonly string MIN_SIZE_ERROR_MESSAGE = String.Format("Минимальный размер {0} px", Program.MIN_DRAWING_SIZE);
+        private readonly string MIN_SIZE_ERROR_MESSAGE = String.Format("Minimum size {0} px", Program.MIN_DRAWING_SIZE);
 
         #endregion
 
@@ -47,8 +47,8 @@ namespace PFEditor
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("Error! Wrong size picture\n{0}", ex.Message);
-                MessageBox.Show("Can't create drawing. Wrong size picture", Program.APP_NAME, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Debug.WriteLine("Error! Wrong picture size \n{0}", ex.Message);
+                MessageBox.Show("Can't create drawing. Wrong picture size", Program.APP_NAME, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 e.Cancel = true;
                 return;
             }

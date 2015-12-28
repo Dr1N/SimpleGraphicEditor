@@ -11,11 +11,11 @@ namespace PFEditor
     {
         #region FIELDS
 
-        private List<Component> _drawingToolsButtons;       //Список кнопок выбора инструмента
+        private ToolStripButton _activeToolButton;          //Актинвая кнопка, инструмента рисования
         private MyCanvas _myCanvas;                         //Холст
         private Color _foreColor = Color.Black;             //Цвет контуров
         private Color _backColor = Color.White;             //Цвет фона
-        private bool _isDitry;                              //Признак изменений в рисунке (to-do возможно перенести в класс холста)
+        private bool _isDitry;                              //Признак изменений в рисунке
         private DrawingHelper _drawingHelper;               //Работа с файлами
         
         #endregion
@@ -42,17 +42,7 @@ namespace PFEditor
 
             this._drawingHelper = new DrawingHelper();
 
-            //Список кнопок - инструменты рисования
-
-            this._drawingToolsButtons = new List<Component>()
-            {
-                this.tsbtnPen,
-                this.tsbtnLine,
-                this.tsbtnRectange,
-                this.tsbtnEllipse
-            };
-
-            //Свяжем кнопки с перечисленим инструментов (to-do альтернатива - словарь)
+            //Свяжем кнопки с перечисленим инструментов
 
             this.tsbtnPen.Tag = DrawingTools.PEN;
             this.tsbtnLine.Tag = DrawingTools.LINE;
@@ -67,6 +57,7 @@ namespace PFEditor
             //Текущий инструмент по-умолчанию
 
             this.tsbtnPen.Checked = true;
+            this._activeToolButton = this.tsbtnPen;
         }
 
         #endregion
@@ -91,10 +82,9 @@ namespace PFEditor
             ToolStripButton currentButton = sender as ToolStripButton;
             if (currentButton != null)
             {
-                foreach (ToolStripButton button in this._drawingToolsButtons)
-                {
-                    button.Checked = (currentButton == button);
-                }
+                currentButton.Checked = true;
+                this._activeToolButton.Checked = false;
+                this._activeToolButton = currentButton;
             }
         }
 
@@ -234,7 +224,6 @@ namespace PFEditor
 
         private void mnAbout_Click(object sender, EventArgs e)
         {
-            throw new Exception("TEST");
             new frmAbout().ShowDialog();
         }
 
@@ -281,23 +270,7 @@ namespace PFEditor
         /// </summary>
         private void OnBeginInverse(object sender, EventArgs e)
         {
-            //Тоолбар
-
-            this.Invoke(new Action(() =>  this.tsbtnNew.Enabled = false));
-            this.Invoke(new Action(() => this.tsbtnOpen.Enabled = false));
-            this.Invoke(new Action(() => this.tsbtnSave.Enabled = false));
-
-            //Меню
-
-            this.Invoke(new Action(() => this.mnNew.Enabled = false));
-            this.Invoke(new Action(() => this.mnOpen.Enabled = false));
-            this.Invoke(new Action(() => this.mnSave.Enabled = false));
-            this.Invoke(new Action(() => this.mnSaveAs.Enabled = false));
-            this.Invoke(new Action(() => this.mnInverse.Enabled = false));
-
-            //Прогресс бар
-
-            this.Invoke(new Action(() => this.sbpbProgress.Visible = true));
+            this.SetControlState(false);
         }
 
         /// <summary>
@@ -306,23 +279,7 @@ namespace PFEditor
         /// </summary>
         private void OnEndInverse(object sender, EventArgs e)
         {
-            //Тоолбар
-
-            this.Invoke(new Action(() => this.tsbtnNew.Enabled = true));
-            this.Invoke(new Action(() => this.tsbtnOpen.Enabled = true));
-            this.Invoke(new Action(() => this.tsbtnSave.Enabled = true));
-
-            //Меню
-
-            this.Invoke(new Action(() => this.mnNew.Enabled = true));
-            this.Invoke(new Action(() => this.mnOpen.Enabled = true));
-            this.Invoke(new Action(() => this.mnSave.Enabled = true));
-            this.Invoke(new Action(() => this.mnSaveAs.Enabled = true));
-            this.Invoke(new Action(() => this.mnInverse.Enabled = true));
-
-            //Прогресс бар
-
-            this.Invoke(new Action(() => this.sbpbProgress.Visible = false));
+            this.SetControlState(true);
         }
 
         #endregion
@@ -395,7 +352,7 @@ namespace PFEditor
         {
             if (this._isDitry == true)
             {
-                return MessageBox.Show("Unsaved changes are lost", Program.APP_NAME, MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.Cancel;
+                return MessageBox.Show("Do you want to save changes?", Program.APP_NAME, MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK;
             }
             return false;
         }
@@ -410,6 +367,27 @@ namespace PFEditor
             this._myCanvas = canvas;
             this.InitCanvas();
             this._isDitry = false;
+        }
+
+        private void SetControlState(bool value)
+        {
+            //Тоолбар
+
+            this.Invoke(new Action(() => this.tsbtnNew.Enabled = value));
+            this.Invoke(new Action(() => this.tsbtnOpen.Enabled = value));
+            this.Invoke(new Action(() => this.tsbtnSave.Enabled = value));
+
+            //Меню
+
+            this.Invoke(new Action(() => this.mnNew.Enabled = value));
+            this.Invoke(new Action(() => this.mnOpen.Enabled = value));
+            this.Invoke(new Action(() => this.mnSave.Enabled = value));
+            this.Invoke(new Action(() => this.mnSaveAs.Enabled = value));
+            this.Invoke(new Action(() => this.mnInverse.Enabled = value));
+
+            //Прогресс бар
+
+            this.Invoke(new Action(() => this.sbpbProgress.Visible = !value));
         }
 
         #endregion

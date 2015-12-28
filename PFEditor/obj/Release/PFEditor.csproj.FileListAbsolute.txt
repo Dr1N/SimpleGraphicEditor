@@ -1,0 +1,11 @@
+D:\My Documents\Profile\Test\PFSOFT\PFEditor\PFEditor\bin\Release\PFEditor.exe.config
+D:\My Documents\Profile\Test\PFSOFT\PFEditor\PFEditor\bin\Release\PFEditor.exe
+D:\My Documents\Profile\Test\PFSOFT\PFEditor\PFEditor\bin\Release\PFEditor.pdb
+D:\My Documents\Profile\Test\PFSOFT\PFEditor\PFEditor\obj\Release\PFEditor.csprojResolveAssemblyReference.cache
+D:\My Documents\Profile\Test\PFSOFT\PFEditor\PFEditor\obj\Release\PFEditor.frmAbout.resources
+D:\My Documents\Profile\Test\PFSOFT\PFEditor\PFEditor\obj\Release\PFEditor.frmMain.resources
+D:\My Documents\Profile\Test\PFSOFT\PFEditor\PFEditor\obj\Release\PFEditor.frmNewDrawing.resources
+D:\My Documents\Profile\Test\PFSOFT\PFEditor\PFEditor\obj\Release\PFEditor.Properties.Resources.resources
+D:\My Documents\Profile\Test\PFSOFT\PFEditor\PFEditor\obj\Release\PFEditor.csproj.GenerateResource.Cache
+D:\My Documents\Profile\Test\PFSOFT\PFEditor\PFEditor\obj\Release\PFEditor.exe
+D:\My Documents\Profile\Test\PFSOFT\PFEditor\PFEditor\obj\Release\PFEditor.pdb

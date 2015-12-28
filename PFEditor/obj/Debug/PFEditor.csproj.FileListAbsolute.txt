@@ -1,11 +1,1 @@
-D:\My Documents\Profile\Test\PFSOFT\PFEditor\PFEditor\bin\Debug\PFEditor.exe.config
-D:\My Documents\Profile\Test\PFSOFT\PFEditor\PFEditor\bin\Debug\PFEditor.exe
-D:\My Documents\Profile\Test\PFSOFT\PFEditor\PFEditor\bin\Debug\PFEditor.pdb
-D:\My Documents\Profile\Test\PFSOFT\PFEditor\PFEditor\obj\Debug\PFEditor.frmAbout.resources
-D:\My Documents\Profile\Test\PFSOFT\PFEditor\PFEditor\obj\Debug\PFEditor.frmMain.resources
-D:\My Documents\Profile\Test\PFSOFT\PFEditor\PFEditor\obj\Debug\PFEditor.frmNewDrawing.resources
-D:\My Documents\Profile\Test\PFSOFT\PFEditor\PFEditor\obj\Debug\PFEditor.Properties.Resources.resources
-D:\My Documents\Profile\Test\PFSOFT\PFEditor\PFEditor\obj\Debug\PFEditor.csproj.GenerateResource.Cache
-D:\My Documents\Profile\Test\PFSOFT\PFEditor\PFEditor\obj\Debug\PFEditor.exe
-D:\My Documents\Profile\Test\PFSOFT\PFEditor\PFEditor\obj\Debug\PFEditor.pdb
-d:\My Documents\Profile\Test\PFSOFT\PFEditor\PFEditor\obj\Debug\PFEditor.csprojResolveAssemblyReference.cache
+d:\My Documents\Profile\Test\PFSOFT\PFEditor\PFEditor\bin\Debug\PFEditor.exe.config

@@ -109,7 +109,7 @@ namespace PFEditor
             if (Program.MIN_DRAWING_SIZE > width || width >= Program.MAX_DRAWING_SIZE 
                 || Program.MIN_DRAWING_SIZE > height || height >= Program.MAX_DRAWING_SIZE)
             {
-                string message = String.Format("Incorrect size of canvas. Size range: {0} ... {1}",
+                string message = String.Format("Incorrect canvas size. Size range: {0} ... {1}",
                     Program.MIN_DRAWING_SIZE, Program.MAX_DRAWING_SIZE);
                 throw new MyCanvasException(message);
             }
@@ -354,28 +354,7 @@ namespace PFEditor
 
                 using (Bitmap bitmap = this.Drawing)
                 {
-                    for (int row = 0; row < bitmap.Height; row++)
-                    {
-                        for (int col = 0; col < bitmap.Width; col++)
-                        {
-                            Color currentClr = bitmap.GetPixel(col, row);
-                            Color inverseClr = Color.FromArgb(255, 255 - currentClr.R, 255 - currentClr.G, 255 - currentClr.B);
-                            bitmap.SetPixel(col, row, inverseClr);
-
-                            //Инициируем событие изменения прогресса инвертирования
-
-                            if (this.InverseProressChanged != null)
-                            {
-                                InverseProgressChangedEventArgs e = new InverseProgressChangedEventArgs()
-                                {
-                                    Min = 0,
-                                    Max = bitmap.Width * bitmap.Height,
-                                    Progress = row * bitmap.Width + col
-                                };
-                                this.InverseProressChanged(this, e);
-                            }
-                        }
-                    }
+                    this.InverseBitmap(bitmap);
 
                     //Кешируем полученное изображение в буфере изображения
 
@@ -395,7 +374,7 @@ namespace PFEditor
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("Error when inversing image\n{0}", ex.Message);
+                Debug.WriteLine("Error during inversing image\n{0}", ex.Message);
             }
             finally
             {
@@ -408,6 +387,36 @@ namespace PFEditor
                 if (this.EndInverse != null)
                 {
                     this.EndInverse(this, new EventArgs());
+                }
+            }
+        }
+
+        /// <summary>
+        /// Инвертирует битмам
+        /// </summary>
+        /// <param name="bitmap">Инвертируемый битмап</param>
+        private void InverseBitmap(Bitmap bitmap)
+        {
+            for (int row = 0; row < bitmap.Height; row++)
+            {
+                for (int col = 0; col < bitmap.Width; col++)
+                {
+                    Color currentClr = bitmap.GetPixel(col, row);
+                    Color inverseClr = Color.FromArgb(255, 255 - currentClr.R, 255 - currentClr.G, 255 - currentClr.B);
+                    bitmap.SetPixel(col, row, inverseClr);
+
+                    //Инициируем событие изменения прогресса инвертирования
+
+                    if (this.InverseProressChanged != null)
+                    {
+                        InverseProgressChangedEventArgs e = new InverseProgressChangedEventArgs()
+                        {
+                            Min = 0,
+                            Max = bitmap.Width * bitmap.Height,
+                            Progress = row * bitmap.Width + col
+                        };
+                        this.InverseProressChanged(this, e);
+                    }
                 }
             }
         }
